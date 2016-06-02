@@ -293,34 +293,6 @@ gulp.task('default', function() {
 
 
 
-/********/
-/* YANN */
-/********/
-
-/* FTP (css)
-***************/
-gulp.task('pushcss', ['styles'], function () {
-  var connection = ftp.create( {
-   host:     secrets.servers.dev.ftp_host,
-   user:     secrets.servers.dev.ftp_user,
-   password: secrets.servers.dev.ftp_pass,
-   parallel: 10,
-   log: gutil.log
- } );
-
-  var globs = [ path.dist + 'styles/**' ];
-
-  gulp.src( globs, { base: '.', buffer: false } )
-  .pipe( connection.newer( secrets.servers.dev.path ) )
-  .pipe( connection.dest(  secrets.servers.dev.path ) );
-
-});
-
-
-gulp.task('yann', function() {
-  gulp.watch([path.source + 'styles/**/*'], ['pushcss']);
-});
-
 
 
 
